@@ -3,7 +3,7 @@ const MongoClient = require('mongodb').MongoClient;
 // get .env parameters
 const mongoURL = process.env.MONGO_URL;
 const mongoDB = process.env.MONGO_DB;
-
+//
 // silgleton client
 let client = null;
 
@@ -15,9 +15,9 @@ async function connect(){
     if(!client){
         // get .env URL and connect
         client = new MongoClient(mongoURL);
-        // connect 
-        await client.connect();
     }
+    // connect 
+    await client.connect();
     // return Database
     return client.db(mongoDB);
 };
