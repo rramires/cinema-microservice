@@ -27,14 +27,12 @@ async function connect(){
  * disconnect from db
  */
 async function disconnect(){
-    if(!client){
-        return true;
+    if(client){
+        await client.close();
+        client = null;
     }
-    await client.close();
-    client = null;
     return true;
 };
-
 
 module.exports = { connect,
                    disconnect };

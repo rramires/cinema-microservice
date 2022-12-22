@@ -16,8 +16,8 @@ test('Connecting to the Database', async() => {
 /**
  * Disconnecting from the Database
  */
-test('Disconnecting from the Database 2x', async() => {
-    await database.disconnect();
+test('Disconnecting from the Database', async() => {
+    //await database.disconnect();
     const isDisconnected = await database.disconnect();
     // verify
     expect(isDisconnected).toBeTruthy();

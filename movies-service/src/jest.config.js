@@ -41,7 +41,7 @@ module.exports = {
 
   // The paths to modules that run some code to configure or set up the testing environment before each test
   // or in package.json "test": "jest --setupFiles dotenv/config"
-  //setupFiles: ["dotenv/config"],
+  setupFiles: ["dotenv/config"],
   
   testMatch: [
     "**/__tests__/**/*.[jt]s?(x)",
