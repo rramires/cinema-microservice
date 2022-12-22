@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon dotenv/config index",
-    "test": "jest --setupFiles dotenv/config"
+    "test": "jest --setupFiles=dotenv/config"
   },
   "author": "rramires",
   "license": "MIT",
