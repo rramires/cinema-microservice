@@ -14,7 +14,7 @@ let server = null;
 /**
  * Start express application
  */
-async function start(){
+async function start(api, repository){
     // create express app
     const app = express();
     //
@@ -29,6 +29,9 @@ async function start(){
         // send app health
         res.send(`${appName} is running at port ${appPort}`);
     });
+    //
+    // connect APP to to Repository
+    api(app, repository);
     //
     // error middleware
     app.use((error, req, res, next) => {
@@ -50,7 +53,7 @@ async function start(){
 /**
  * Finish express application
  */
-async function stop(){
+async function stop(api){
     if(server){
         await server.close();
         server = null;

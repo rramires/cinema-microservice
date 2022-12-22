@@ -6,13 +6,18 @@ const server = require('./server');
 // install dev extension: npm i --save-dev supertest  
 const request = require('supertest');
 
+// Mocks
+const apiMock = jest.fn((app, repository) => {
+    return true;
+});
+
 
 /**
  * Server Start
  */
 test('Server Start', async() => {
     // initialize server
-    const app = await server.start();
+    const app = await server.start(apiMock);
     // verify
     expect(app).toBeTruthy();
 });
@@ -23,7 +28,7 @@ test('Server Start', async() => {
  */
 test('Health check', async() => {
     // initialize server
-    const app = await server.start();
+    const app = await server.start(apiMock);
     // call method
     const resp = await request(app).get('/health');
     // verify
