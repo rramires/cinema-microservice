@@ -2,9 +2,6 @@
 const express = require('express');
 const morgan = require('morgan');
 const helmet = require('helmet');
-// get .env parameters
-const appPort = process.env.APP_PORT;
-const appName = process.env.APP_NAME;
 
 /**
  * Aux
@@ -27,7 +24,7 @@ async function start(api, repository){
     // app status middleware
     app.use('/health', (req, res, next) => {
         // send app health
-        res.send(`${appName} is running at port ${appPort}`);
+        res.send(`${process.env.APP_NAME} is running at port ${process.env.APP_PORT}`);
     });
     //
     // connect APP to to Repository
@@ -42,8 +39,8 @@ async function start(api, repository){
     });
     if(!server){
         // app status handler
-        server = app.listen(appPort, () => {
-            console.log(`${appName} started at port ${appPort}`);
+        server = app.listen(process.env.APP_PORT, () => {
+            console.log(`${process.env.APP_NAME} started at port ${process.env.APP_PORT}`);
         });
     }
     return server;

@@ -9,15 +9,9 @@ module.exports = (app, repository) => {
      */
     app.get('/movies/premieres', async(req, res, next) => {
         // get 
-        const movies = repository.getPremiereMovies();
-        // test
-        if(movies && movies.length){
-            res.json(movies);
-        }
-        else{
-            // status not found
-            res.sendStatus(404);
-        }
+        const movies = await repository.getPremiereMovies();
+        // response
+        res.json(movies);
     });
 
 
@@ -26,7 +20,7 @@ module.exports = (app, repository) => {
      */
     app.get('/movies/:id', async(req, res, next) => {
         // get 
-        const movie = repository.getMovieById(req.params.id);
+        const movie = await repository.getMovieById(req.params.id);
         // test
         if(movie){
             res.json(movie);
@@ -43,14 +37,8 @@ module.exports = (app, repository) => {
      */
     app.get('/movies', async(req, res, next) => {
         // get 
-        const movies = repository.getAllMovies();
-        // test
-        if(movies && movies.length){
-            res.json(movies);
-        }
-        else{
-            // status not found
-            res.sendStatus(404);
-        }
+        const movies = await repository.getAllMovies();
+        // response
+        res.json(movies);
     });
 };
