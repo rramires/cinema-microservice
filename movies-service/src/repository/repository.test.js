@@ -43,6 +43,17 @@ test('Return movie by ID', async() => {
 
 
 /**
+ * Return movie by MALFORMED ID
+ */
+test('Return movie by MALFORMED ID', async() => {
+    // call method
+    const movie = await repository.getMovieById('MALFORMED_ID');
+    // verify
+    expect(movie).toBeFalsy();
+});
+
+
+/**
  * Return Premiere movies
  */
 test('Return Premiere movies', async() => {

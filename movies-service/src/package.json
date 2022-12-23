@@ -4,8 +4,8 @@
   "description": "Provide movies info",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon dotenv/config index",
-    "test": "jest --forceExit"
+    "start": "nodemon -r dotenv/config index",
+    "test": "jest"
   },
   "author": "rramires",
   "license": "MIT",

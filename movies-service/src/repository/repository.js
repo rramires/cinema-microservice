@@ -17,9 +17,15 @@ async function getAllMovies(){
  * Return movie filtered by ID
  */
 async function getMovieById(id){
-    const db = await database.connect();
-    // filter by DB ID
-    return db.collection('movies').findOne({ _id: ObjectId(id) });
+    // test 4 chars hex format
+    if(/^[a-fA-F0-9]{24}$/.test(id)){
+        const db = await database.connect();
+         // filter by DB ID
+        return db.collection('movies').findOne({ _id: ObjectId(id) });
+    }
+    else{
+        return null;
+    }
 };
 
 
