@@ -16,4 +16,16 @@ async function getAllCities(){
 };
 
 
-module.exports = { getAllCities };
+/**
+ * Return cinemas by city id
+ */
+async function getCinemasByCityId(citiId){
+  const db = await database.connect();
+  //
+  return db.collection('catalog')
+           .findOne({ _id: new ObjectId(citiId) }, { projection: { cinemas: 1} });
+};
+
+
+module.exports = { getAllCities,
+                   getCinemasByCityId };
