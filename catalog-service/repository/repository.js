@@ -4,44 +4,16 @@ const { ObjectId } = require('mongodb');
 
 
 /**
- * Return All movies
+ * Return All cities
  */
-async function getAllMovies(){
+async function getAllCities(){
     const db = await database.connect();
     //
-    return db.collection('movies').find().toArray();
+    return db.collection('catalog')
+             .find({/* filter */})
+             .project({ cidade: 1, uf: 1, pais: 1 /* fields with 1 or 0 */})
+             .toArray();
 };
 
 
-/**
- * Return movie filtered by ID
- */
-async function getMovieById(id){
-    // test 4 chars hex format
-    if(/^[a-fA-F0-9]{24}$/.test(id)){
-        const db = await database.connect();
-         // filter by DB ID
-        return db.collection('movies').findOne({ _id: ObjectId(id) });
-    }
-    else{
-        return null;
-    }
-};
-
-
-/**
- * Return Premiere movies
- */
-async function getPremiereMovies(){
-    const db = await database.connect();
-    // take the previous month 
-    const monthAgo = new Date();
-          monthAgo.setMonth(-1);
-    // filter by date >= previous month
-    return db.collection('movies').find({ dataLancamento: { $gte: monthAgo } }).toArray();
-};
-
-
-module.exports = { getAllMovies,
-                   getMovieById,
-                   getPremiereMovies };
+module.exports = { getAllCities };

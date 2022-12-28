@@ -1,0 +1,258 @@
+[{
+  "_id": {
+    "$oid": "63a630b1976a1807efb7c1e4"
+  },
+  "cidade": "Londrina",
+  "uf": "PR",
+  "cinemas": []
+},{
+  "_id": {
+    "$oid": "63a630b1976a1807efb7c1e5"
+  },
+  "cidade": "Curitiba",
+  "uf": "PR",
+  "pais": "BR",
+  "cinemas": [
+    {
+      "_id": {
+        "$oid": "63a630b1976a1807efb7c1e2"
+      },
+      "nome": "UCI Palladium",
+      "salas": [
+        {
+          "nome": 1,
+          "sessoes": [
+            {
+              "data": {
+                "$date": {
+                  "$numberLong": "1672218540000"
+                }
+              },
+              "idFilme": {
+                "$oid": "63a30e1b196151c2773de692"
+              },
+              "filme": "Vingadores: Guerra Infinita",
+              "valor": 25,
+              "assentos": [
+                {
+                  "numero": 1,
+                  "disponivel": true
+                },
+                {
+                  "numero": 2,
+                  "disponivel": false
+                }
+              ]
+            },
+            {
+              "data": {
+                "$date": {
+                  "$numberLong": "1672225200000"
+                }
+              },
+              "idFilme": {
+                "$oid": "63a30e1b196151c2773de692"
+              },
+              "filme": "Vingadores: Guerra Infinita",
+              "valor": 25,
+              "assentos": [
+                {
+                  "numero": 1,
+                  "disponivel": true
+                },
+                {
+                  "numero": 2,
+                  "disponivel": true
+                }
+              ]
+            },
+            {
+              "data": {
+                "$date": {
+                  "$numberLong": "1672232400000"
+                }
+              },
+              "idFilme": {
+                "$oid": "63a30e1b196151c2773de693"
+              },
+              "filme": "Vingadores: Era de Ultron",
+              "valor": 20,
+              "assentos": [
+                {
+                  "numero": 1,
+                  "disponivel": true
+                },
+                {
+                  "numero": 2,
+                  "disponivel": false
+                },
+                {
+                  "numero": 2,
+                  "disponivel": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "nome": 2,
+          "sessoes": [
+            {
+              "data": {
+                "$date": {
+                  "$numberLong": "1672218000000"
+                }
+              },
+              "idFilme": {
+                "$oid": "63a30e1b196151c2773de693"
+              },
+              "filme": "Vingadores: Era de Ultron",
+              "valor": 25,
+              "assentos": [
+                {
+                  "numero": 1,
+                  "disponivel": true
+                },
+                {
+                  "numero": 2,
+                  "disponivel": false
+                }
+              ]
+            },
+            {
+              "data": {
+                "$date": {
+                  "$numberLong": "1672225200000"
+                }
+              },
+              "idFilme": {
+                "$oid": "605e57238ed0562b5da2f87c"
+              },
+              "filme": "Vingadores: Ultimato",
+              "valor": 25,
+              "assentos": [
+                {
+                  "numero": 1,
+                  "disponivel": true
+                },
+                {
+                  "numero": 2,
+                  "disponivel": true
+                }
+              ]
+            },
+            {
+              "data": {
+                "$date": {
+                  "$numberLong": "1672232400000"
+                }
+              },
+              "idFilme": {
+                "$oid": "63a30e1b196151c2773de691"
+              },
+              "filme": "Vingadores: Ultimato",
+              "valor": 20,
+              "assentos": [
+                {
+                  "numero": 1,
+                  "disponivel": true
+                },
+                {
+                  "numero": 2,
+                  "disponivel": false
+                },
+                {
+                  "numero": 2,
+                  "disponivel": true
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "_id": {
+        "$oid": "63a630b1976a1807efb7c1e3"
+      },
+      "nome": "Cinemark Barigui",
+      "salas": [
+        {
+          "nome": 100,
+          "sessoes": [
+            {
+              "data": {
+                "$date": {
+                  "$numberLong": "1672254000000"
+                }
+              },
+              "idFilme": {
+                "$oid": "63a30e1b196151c2773de691"
+              },
+              "filme": "Vingadores: Ultimato",
+              "valor": 25,
+              "assentos": [
+                {
+                  "numero": 1,
+                  "disponivel": true
+                },
+                {
+                  "numero": 2,
+                  "disponivel": false
+                }
+              ]
+            },
+            {
+              "data": {
+                "$date": {
+                  "$numberLong": "1672225200000"
+                }
+              },
+              "idFilme": {
+                "$oid": "63a30e1b196151c2773de691"
+              },
+              "filme": "Vingadores: Ultimato",
+              "valor": 25,
+              "assentos": [
+                {
+                  "numero": 1,
+                  "disponivel": true
+                },
+                {
+                  "numero": 2,
+                  "disponivel": true
+                }
+              ]
+            },
+            {
+              "data": {
+                "$date": {
+                  "$numberLong": "1672232400000"
+                }
+              },
+              "idFilme": {
+                "$oid": "63a30e1b196151c2773de693"
+              },
+              "filme": "Vingadores: Era de Ultron",
+              "valor": 20,
+              "assentos": [
+                {
+                  "numero": 1,
+                  "disponivel": true
+                },
+                {
+                  "numero": 2,
+                  "disponivel": false
+                },
+                {
+                  "numero": 2,
+                  "disponivel": true
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}]
