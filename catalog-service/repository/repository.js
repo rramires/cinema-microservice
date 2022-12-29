@@ -79,7 +79,41 @@ async function getMoviesByCityId(cityId){
 }; 
 
 
+/**
+ * Return sessions by city id
+ */
+async function getMovieSessionByCityId(movieId, cityId){
+  const db = await database.connect();
+  //
+  const group = await db.collection('catalog')
+                        .aggregate([ 
+                                      /* match mesma coisa que os filtros */
+                                      { $match: { "_id": new ObjectId(cityId) } },
+                                      /* unwind +- desenrola! joga tudo no mesmo nível */
+                                      { $unwind: "$cinemas" },
+                                      { $unwind: "$cinemas.salas" },
+                                      { $unwind: "$cinemas.salas.sessoes" },
+                                      { $match: { "cinemas.salas.sessoes.idFilme": new ObjectId(movieId)} },
+                                      /* agrupamento, para tirar as repetições */
+                                      { $group: { _id: { 
+                                                        _id: "$cinemas.salas.sessoes.idFilme",
+                                                        titulo: "$cinemas.salas.sessoes.filme", 
+                                                        idCinema: "$cinemas._id",
+                                                        cinema: "$cinemas.nome",
+                                                        sala: "$cinemas.salas.nome",
+                                                        sessao: "$cinemas.salas.sessoes"
+                                                       } } }
+                                    ])
+                        .toArray();
+  // mapeia pra subir 1 nivel, retirando objeto inutil 
+  // de { _id: { titulo, _id } }
+  // para titulo, _id
+  return group.map(g => g._id); 
+}; 
+
+
 module.exports = { getAllCities,
                    getCinemasByCityId,
                    getMoviesByCinemaId,
-                   getMoviesByCityId };
+                   getMoviesByCityId,
+                   getMovieSessionByCityId };

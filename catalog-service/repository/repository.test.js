@@ -5,6 +5,7 @@ const repository = require('./repository');
 // aux
 let cityId = null;
 let cinemaId = null;
+let movieId = null;
 
 /**
  * Execute before tests
@@ -15,6 +16,8 @@ beforeAll(async() => {
     //
     const cinemas = await repository.getCinemasByCityId(cityId);
     cinemaId = cinemas[0]._id;
+    //
+    movieId = cinemas[0].salas[0].sessoes[0].idFilme;
 });
 
 
@@ -61,6 +64,18 @@ test('Return movies by cinema ID', async() => {
 test('Return movies by city ID', async() => {
     // call method
     const movies = await repository.getMoviesByCityId(cityId);
+    // verify
+    expect(movies).toBeTruthy();
+    expect(Array.isArray(movies)).toBeTruthy();
+});
+
+
+/**
+ * Return movies by city ID
+ */
+test('Return movie sessions by city ID', async() => {
+    // call method
+    const movies = await repository.getMovieSessionByCityId(movieId, cityId);
     // verify
     expect(movies).toBeTruthy();
     expect(Array.isArray(movies)).toBeTruthy();
