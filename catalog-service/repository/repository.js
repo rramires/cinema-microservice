@@ -22,10 +22,38 @@ async function getAllCities(){
 async function getCinemasByCityId(citiId){
   const db = await database.connect();
   //
-  return db.collection('catalog')
-           .findOne({ _id: new ObjectId(citiId) }, { projection: { cinemas: 1} });
+  const city = await db.collection('catalog')
+                 .findOne({ _id: new ObjectId(citiId) }, { projection: { cinemas: 1 } });
+  //
+  return city.cinemas;
 };
 
 
+/**
+ * Return cinemas by city id
+ */
+async function getMoviesByCinemaId(cinemaId){
+  const db = await database.connect();
+  //
+  const group = await db.collection('catalog')
+                        .aggregate([ 
+                                      /* match mesma coisa que os filtros */
+                                      { $match: { "cinemas._id": new ObjectId(cinemaId) } },
+                                      /* unwind +- desenrola! joga tudo no mesmo nível */
+                                      { $unwind: "$cinemas" },
+                                      { $unwind: "$cinemas.salas" },
+                                      { $unwind: "$cinemas.salas.sessoes" },
+                                      /* agrupamento, para tirar as repetições */
+                                      { $group: { _id: { titulo: "$cinemas.salas.sessoes.filme", _id: "$cinemas.salas.sessoes.idFilme" } } }
+                                    ])
+                        .toArray();
+  // mapeia pra subir 1 nivel, retirando objeto inutil 
+  // de { _id: { titulo, _id } }
+  // para titulo, _id
+  return group.map(g => g._id); 
+}; 
+
+
 module.exports = { getAllCities,
-                   getCinemasByCityId };
+                   getCinemasByCityId,
+                   getMoviesByCinemaId };

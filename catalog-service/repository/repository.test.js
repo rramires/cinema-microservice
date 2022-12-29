@@ -4,14 +4,17 @@ const repository = require('./repository');
 
 // aux
 let cityId = null;
-
+let cinemaId = null;
 
 /**
  * Execute before tests
  */
 beforeAll(async() => {
     const cities = await repository.getAllCities();
-    cityId = cities[0]._id;
+    cityId = cities[1]._id;
+    //
+    const cinemas = await repository.getCinemasByCityId(cityId);
+    cinemaId = cinemas[0]._id;
 });
 
 
@@ -32,11 +35,21 @@ test('Return All Cities', async() => {
  * Return cinemas by city ID
  */
 test('Return cinemas by city ID', async() => {
-
-    console.log('cityId:', cityId)
     // call method
-    const city = await repository.getCinemasByCityId(cityId);
+    const cinemas = await repository.getCinemasByCityId(cityId);
     // verify
-    expect(city).toBeTruthy();
-    expect(Array.isArray(city.cinemas)).toBeTruthy();
+    expect(cinemas).toBeTruthy();
+    expect(Array.isArray(cinemas)).toBeTruthy();
+});
+
+
+/**
+ * Return movies by cinema ID
+ */
+test('Return movies by cinema ID', async() => {
+    // call method
+    const movies = await repository.getMoviesByCinemaId(cinemaId);
+    // verify
+    expect(movies).toBeTruthy();
+    expect(Array.isArray(movies)).toBeTruthy();
 });
