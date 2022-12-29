@@ -53,3 +53,15 @@ test('Return movies by cinema ID', async() => {
     expect(movies).toBeTruthy();
     expect(Array.isArray(movies)).toBeTruthy();
 });
+
+
+/**
+ * Return movies by city ID
+ */
+test('Return movies by city ID', async() => {
+    // call method
+    const movies = await repository.getMoviesByCityId(cityId);
+    // verify
+    expect(movies).toBeTruthy();
+    expect(Array.isArray(movies)).toBeTruthy();
+});
