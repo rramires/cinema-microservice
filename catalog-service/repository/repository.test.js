@@ -80,3 +80,15 @@ test('Return movie sessions by city ID', async() => {
     expect(movies).toBeTruthy();
     expect(Array.isArray(movies)).toBeTruthy();
 });
+
+
+/**
+ * Return movies by cinema ID
+ */
+test('Return movie sessions by cinema ID', async() => {
+    // call method
+    const movies = await repository.getMovieSessionByCinemaId(movieId, cinemaId);
+    // verify
+    expect(movies).toBeTruthy();
+    expect(Array.isArray(movies)).toBeTruthy();
+});

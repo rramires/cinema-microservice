@@ -19,8 +19,8 @@ let app = null;
  * Execute before tests
  */
 beforeAll(async() => {
-    // port change to avoid conflict with default 3000 at server.test.js
-    process.env.APP_PORT = 3001
+    // port change to avoid conflict with default 3001 at server.test.js
+    process.env.APP_PORT = 3002
     // initialize server
     app = await server.start(movies, repositoryMock);
 });
