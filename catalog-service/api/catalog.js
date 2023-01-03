@@ -12,7 +12,9 @@ module.exports = (app, repository) => {
      */
     app.get('/cities/:cityId/movies/:movieId', async(req, res, next) => {
         // get 
-        const sessions = await repository.getMovieSessionByCinemaId(req.params.movieId, req.params.cityId);
+        const sessions = await repository.getMovieSessionByCityId(req.params.movieId, req.params.cityId);
+
+        console.log("Aqui!!!", req.params.movieId, req.params.cityId);
         // test
         if(sessions){
             res.json(sessions);
