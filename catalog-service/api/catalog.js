@@ -6,15 +6,21 @@
  */
 module.exports = (app, repository) => {
 
-    
+
     /**
-     * Get Cities
+     * Get Sessions by city and movie ID
      */
-    app.get('/cities', async(req, res, next) => {
+    app.get('/cities/:cityId/movies/:movieId', async(req, res, next) => {
         // get 
-        const cities = await repository.getAllCities();
-        // response
-        res.json(cities);
+        const sessions = await repository.getMovieSessionByCinemaId(req.params.movieId, req.params.cityId);
+        // test
+        if(sessions){
+            res.json(sessions);
+        }
+        else{
+            // status not found
+            res.sendStatus(404);
+        }
     });
 
 
@@ -27,23 +33,6 @@ module.exports = (app, repository) => {
         // test
         if(movies){
             res.json(movies);
-        }
-        else{
-            // status not found
-            res.sendStatus(404);
-        }
-    });
-
-
-    /**
-     * Get Sessions by city and movie ID
-     */
-    app.get('/cities/:cityId/movies/:movieId', async(req, res, next) => {
-        // get 
-        const sessions = await repository.getMovieSessionByCinemaId(req.params.movieId, req.params.cityId);
-        // test
-        if(sessions){
-            res.json(sessions);
         }
         else{
             // status not found
@@ -70,19 +59,13 @@ module.exports = (app, repository) => {
 
 
     /**
-     * Get Movies by cinema ID
+     * Get Cities
      */
-    app.get('/cinemas/:cinemaId/movies', async(req, res, next) => {
+    app.get('/cities', async(req, res, next) => {
         // get 
-        const movies = await repository.getMoviesByCinemaId(req.params.cinemaId);
-        // test
-        if(movies){
-            res.json(cinemas);
-        }
-        else{
-            // status not found
-            res.sendStatus(404);
-        }
+        const cities = await repository.getAllCities();
+        // response
+        res.json(cities);
     });
 
 
@@ -95,6 +78,23 @@ module.exports = (app, repository) => {
         // test
         if(sessions){
             res.json(sessions);
+        }
+        else{
+            // status not found
+            res.sendStatus(404);
+        }
+    });
+
+
+    /**
+     * Get Movies by cinema ID
+     */
+    app.get('/cinemas/:cinemaId/movies', async(req, res, next) => {
+        // get 
+        const movies = await repository.getMoviesByCinemaId(req.params.cinemaId);
+        // test
+        if(movies){
+            res.json(movies);
         }
         else{
             // status not found

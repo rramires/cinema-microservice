@@ -23,8 +23,14 @@ function getAllCities(){
  * Return cinemas by city id
  */
 function getCinemasByCityId(citiId){
-    //
-    return catalog[catalog.length -1].cinemas;
+    // ID -1 used for error 404 test
+    if(citiId === 'none'){
+        return null;
+    }
+    else{
+        //
+        return catalog[catalog.length -1].cinemas;
+    }
 };
 
 
@@ -32,12 +38,18 @@ function getCinemasByCityId(citiId){
  * Return cinemas by city id
  */
 function getMoviesByCinemaId(cinemaId){
-    return (getCinemasByCityId()).map(cinema => {
-        return {
-            titulo: cinema.salas[0].sessoes[0].filme,
-            _id: cinema.salas[0].sessoes[0].idFilme
-        }
-    });
+    // ID "none" used for error 404 test
+    if(cinemaId === 'none'){
+        return null;
+    }
+    else{
+        return (getCinemasByCityId()).map(cinema => {
+            return {
+                titulo: cinema.salas[0].sessoes[0].filme,
+                _id: cinema.salas[0].sessoes[0].idFilme
+            }
+        });
+    }
 }; 
 
 
@@ -45,7 +57,13 @@ function getMoviesByCinemaId(cinemaId){
  * Return movies by city id
  */
 async function getMoviesByCityId(cityId){
-    return getMoviesByCinemaId();
+    // ID "none" used for error 404 test
+    if(cityId === 'none'){
+        return null;
+    }
+    else{
+        return getMoviesByCinemaId(cityId);
+    }
 }; 
 
 
@@ -53,16 +71,22 @@ async function getMoviesByCityId(cityId){
  * Return sessions by city id
  */
 async function getMovieSessionByCityId(movieId, cityId){
-    return (getCinemasByCityId()).map(cinema => {
-        return {
-            titulo: cinema.salas[0].sessoes[0].filme,
-            _id: cinema.salas[0].sessoes[0].idFilme,
-            cinema: cinema.nome,
-            idCinema: cinema._id,
-            sala: cinema.salas[0].nome,
-            sessao: cinema.salas[0].sessoes[0]
-        }
-    });
+    // ID "none" used for error 404 test
+    if(movieId === 'none' || cityId === 'none'){
+        return null;
+    }
+    else{
+        return (getCinemasByCityId()).map(cinema => {
+            return {
+                titulo: cinema.salas[0].sessoes[0].filme,
+                _id: cinema.salas[0].sessoes[0].idFilme,
+                cinema: cinema.nome,
+                idCinema: cinema._id,
+                sala: cinema.salas[0].nome,
+                sessao: cinema.salas[0].sessoes[0]
+            }
+        });
+    }
 }; 
 
 
@@ -70,7 +94,12 @@ async function getMovieSessionByCityId(movieId, cityId){
  * Return sessions by cinema id
  */
 async function getMovieSessionByCinemaId(movieId, cinemaId){
-    return getMovieSessionByCityId();
+    if(movieId === 'none' || cinemaId === 'none'){
+        return null;
+    }
+    else{
+        return getMovieSessionByCityId();
+    }
 }
   
 
