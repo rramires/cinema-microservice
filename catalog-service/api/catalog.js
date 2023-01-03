@@ -6,8 +6,7 @@
  */
 module.exports = (app, repository) => {
 
-    const repository = require('../repository/repository');
-
+    
     /**
      * Get Cities
      */
