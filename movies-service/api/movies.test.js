@@ -108,3 +108,15 @@ test('POST /movies/ 201 OK', async() => {
     expect(resp.status).toEqual(201);
     expect(typeof resp.body).toBe('object');
 }); 
+
+
+/**
+ * DELETE /movies/:id
+ */
+test('DELETE /movies/:id 204', async() => {
+    const id = '63a30e1b196151c2773de691';
+    // get
+    const resp = await request(app).delete('/movies/' + id);
+    // verify
+    expect(resp.status).toEqual(204);
+ });

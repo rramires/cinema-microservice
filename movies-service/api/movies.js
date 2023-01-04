@@ -66,4 +66,15 @@ module.exports = (app, repository) => {
         //
         res.status(201).json(result);
     });
+
+
+    /**
+     * Delete Movie
+     */
+    app.delete('/movies/:id', async(req, res, next) => {
+        // delete
+        const result = await repository.deleteMovie(req.params.id);
+        //
+        res.status(204).json(result);
+    });
 };

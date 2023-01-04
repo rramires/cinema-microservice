@@ -62,7 +62,16 @@ async function addMovie(movie){
 };
 
 
+/**
+ * Delete movie
+ */
+async function deleteMovie(id){
+  return id;
+};
+
+
 module.exports = { getAllMovies,
                    getMovieById,
                    getPremiereMovies,
-                   addMovie };
+                   addMovie,
+                   deleteMovie };

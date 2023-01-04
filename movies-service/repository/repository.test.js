@@ -75,7 +75,37 @@ test('Return Premiere movies', async() => {
  * Add new Movie
  */
 test('Add Movie', async() => {
-    // call method
+    //
+    let movie = null
+    //
+    try{
+        // call method
+        movie = await repository.addMovie({
+            titulo: "Test Movie",
+            sinopse: "Test Movie summary",
+            duracao: 120,
+            dataLancamento: new Date(),
+            imagem: "test.jpg",
+            categorias: ["aventura"],
+        });
+    }
+    finally{ // finally sempre é executado
+        if(movie){
+            // apaga o registro inserido
+            await repository.deleteMovie(movie._id);
+        }
+    }
+    // verify
+    expect(movie).toBeTruthy();
+    expect(typeof movie).toBe('object');
+});
+
+
+/**
+ * Delete Movie
+ */
+test('Delete Movie', async() => {
+    // add
     const movie = await repository.addMovie({
         titulo: "Test Movie",
         sinopse: "Test Movie summary",
@@ -84,8 +114,8 @@ test('Add Movie', async() => {
         imagem: "test.jpg",
         categorias: ["aventura"],
     });
-    console.log(movie)
+    // apaga o registro inserido
+    const deleted = await repository.deleteMovie(movie._id);
     // verify
-    expect(movie).toBeTruthy();
-    expect(typeof movie).toBe('object');
+    expect(deleted).toBeTruthy();
 });

@@ -54,7 +54,19 @@ async function addMovie(movie){
 };
 
 
+/**
+ * Delete movie
+ */
+async function deleteMovie(id){
+    const db = await database.connect();
+    // delete
+    const result = await db.collection('movies').deleteOne({ _id: new ObjectId(id) });
+    return result;
+};
+
+
 module.exports = { getAllMovies,
                    getMovieById,
                    getPremiereMovies,
-                   addMovie };
+                   addMovie,
+                   deleteMovie };
