@@ -54,6 +54,15 @@ async function getPremiereMovies(){
 };
 
 
+/**
+ * Add movie
+ */
+async function addMovie(movie){
+  return movies[0];
+};
+
+
 module.exports = { getAllMovies,
                    getMovieById,
-                   getPremiereMovies };
+                   getPremiereMovies,
+                   addMovie };

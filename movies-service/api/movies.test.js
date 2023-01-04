@@ -48,7 +48,6 @@ test('GET /movies 200 OK', async() => {
 });
 
 
-
 /**
  * GET /movies/:id
  */
@@ -85,4 +84,27 @@ test('GET /movies/premieres 200 OK', async() => {
     expect(resp.status).toEqual(200);
     expect(Array.isArray(resp.body)).toBeTruthy();
     expect(resp.body.length).toBeTruthy();
+});
+
+
+/**
+ * POST /movies/
+ */
+test('POST /movies/ 201 OK', async() => {
+    const movie = {
+        titulo: "Test Movie",
+        sinopse: "Test Movie summary",
+        duracao: 120,
+        dataLancamento: new Date(),
+        imagem: "test.jpg",
+        categorias: ["aventura"]
+    };
+    // post
+    const resp = await request(app)
+                         .post('/movies/')
+                         .set('Content-Type', 'application/json')
+                         .send(movie);                  
+    // verify
+    expect(resp.status).toEqual(201);
+    expect(typeof resp.body).toBe('object');
 }); 

@@ -69,3 +69,23 @@ test('Return Premiere movies', async() => {
     // date >= previous month ->> Update dataLancamento in movies if fail <<-
     expect(premiereMovies[0].dataLancamento.getTime()).toBeGreaterThanOrEqual(monthAgo.getTime());
 }); 
+
+
+/**
+ * Add new Movie
+ */
+test('Add Movie', async() => {
+    // call method
+    const movie = await repository.addMovie({
+        titulo: "Test Movie",
+        sinopse: "Test Movie summary",
+        duracao: 120,
+        dataLancamento: new Date(),
+        imagem: "test.jpg",
+        categorias: ["aventura"],
+    });
+    console.log(movie)
+    // verify
+    expect(movie).toBeTruthy();
+    expect(typeof movie).toBe('object');
+});

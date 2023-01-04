@@ -18,6 +18,8 @@ async function start(api, repository){
     // filter malicious requests middleware
     app.use(helmet());
     //
+    app.use(express.json());
+    //
     // split and print request middleware
     app.use(morgan('dev'));
     //

@@ -42,6 +42,19 @@ async function getPremiereMovies(){
 };
 
 
+/**
+ * Add movie
+ */
+async function addMovie(movie){
+    const db = await database.connect();
+    // insert
+    const result = await db.collection('movies').insertOne(movie);
+    movie._id = result.insertedId;
+    return movie;
+};
+
+
 module.exports = { getAllMovies,
                    getMovieById,
-                   getPremiereMovies };
+                   getPremiereMovies,
+                   addMovie };

@@ -41,4 +41,29 @@ module.exports = (app, repository) => {
         // response
         res.json(movies);
     });
+
+
+    /**
+     * Add Movie
+     */
+    app.post('/movies', async(req, res, next) => {
+        //
+        const titulo = req.body.titulo;
+        const sinopse = req.body.sinopse;
+        const duracao = parseInt(req.body.duracao);
+        const dataLancamento = new Date(req.body.dataLancamento);
+        const imagem = req.body.imagem;
+        const categorias = req.body.categorias; 
+        // insert
+        const result = await repository.addMovie({
+            titulo,
+            sinopse,
+            duracao,
+            dataLancamento,
+            imagem,
+            categorias
+        });
+        //
+        res.status(201).json(result);
+    });
 };
