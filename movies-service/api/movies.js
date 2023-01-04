@@ -1,3 +1,6 @@
+//
+const validationMiddleware = require('../middlewares/validationMiddeware');
+
 /**
  * Export function for dependency inversion betwin app and repository
  * connection on runtime execute: server->start
@@ -46,7 +49,7 @@ module.exports = (app, repository) => {
     /**
      * Add Movie
      */
-    app.post('/movies', async(req, res, next) => {
+    app.post('/movies', validationMiddleware.validateMovie, async(req, res, next) => {
         //
         const titulo = req.body.titulo;
         const sinopse = req.body.sinopse;
