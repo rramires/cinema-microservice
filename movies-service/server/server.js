@@ -1,4 +1,5 @@
 // imports
+require('express-async-errors'); // express async error patch
 const express = require('express');
 const morgan = require('morgan');
 const helmet = require('helmet');
