@@ -1,19 +1,20 @@
 {
   "name": "api-gateway",
   "version": "1.0.0",
-  "description": "Provide single endpointo to access the microservices",
+  "description": "Provide single endpoint to access the microservices",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node -r dotenv/config index",
+    "dev": "nodemon -r dotenv/config index"
   },
   "author": "rramires",
   "license": "MIT",
   "dependencies": {
     "cookie-parser": "^1.4.6",
+    "dotenv-safe": "^8.2.0",
     "express": "^4.18.2",
     "express-http-proxy": "^1.6.3",
     "helmet": "^6.0.1",
-    "http": "^0.0.1-security",
     "morgan": "^1.10.0"
   }
 }
