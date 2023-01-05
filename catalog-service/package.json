@@ -4,7 +4,8 @@
   "description": "Provide cinema catalog info",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon -r dotenv/config index",
+    "start": "node -r dotenv/config index",
+    "dev": "nodemon -r dotenv/config index",
     "test": "jest"
   },
   "author": "rramires",
@@ -15,7 +16,8 @@
     "express-async-errors": "^3.1.1",
     "helmet": "^6.0.1",
     "mongodb": "^4.13.0",
-    "morgan": "^1.10.0"
+    "morgan": "^1.10.0",
+    "winston": "^3.8.2"
   },
   "devDependencies": {
     "jest": "^29.3.1",

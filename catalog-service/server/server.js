@@ -3,6 +3,7 @@ require('express-async-errors'); // express async error patch
 const express = require('express');
 const morgan = require('morgan');
 const helmet = require('helmet');
+const logger = require('../config/logger');
 
 /**
  * Aux
@@ -34,7 +35,7 @@ async function start(api, repository){
     // error middleware
     app.use((error, req, res, next) => {
         // print error
-        console.error(error);
+        logger.error(`${error.stack}`);
         // send server internal error to client
         res.sendStatus(500);
     });
