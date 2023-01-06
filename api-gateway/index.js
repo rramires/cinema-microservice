@@ -28,7 +28,7 @@ const options = {
 //
 // auth routes
 app.post('/login', authController.doLogin);
-app.post('/logout', authController.doLogout);
+app.post('/logout', authController.validateToken, authController.doLogout);
 //
 // proxies
 const moviesServiceProxy = httpProxy(process.env.MOVIES_API_URL, options);
