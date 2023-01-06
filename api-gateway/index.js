@@ -5,12 +5,16 @@ const cookieParser = require('cookie-parser');
 const morgan = require('morgan');
 const helmet = require('helmet');
 //
+const authController = require('./authController');
+//
 // express app
 const app = express();
 // slice req
 app.use(morgan('dev'));
 // protection
 app.use(helmet());
+// json
+app.use(express.json());
 // cookies
 app.use(cookieParser());
 //
@@ -21,11 +25,15 @@ const options = {
         return req.originalUrl;
     }
 }
+//
+// auth routes
+app.post('/login', authController.doLogin);
+app.post('/logout', authController.doLogout);
+//
 // proxies
 const moviesServiceProxy = httpProxy(process.env.MOVIES_API_URL, options);
 const catalogServiceProxy = httpProxy(process.env.CATALOG_API_URL, options);
 //
-// routes
 // movies
 app.use('/movies', moviesServiceProxy);
 // catalog
