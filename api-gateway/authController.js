@@ -1,18 +1,32 @@
 // imports
 const jwt = require('jsonwebtoken');
 
+// mock level profiles
+const PROFILE_GUEST = 0;
+const PROFILE_ADMIN = 1;
+
 
 async function doLogin(req, res, next){
     const email = req.body.email;
     const pass = req.body.pass;
     // mock auth
-    if(email === 'test@test.com' &&
+    if(email === 'guest@test.com' &&
        pass === 'abc123'){
         // create token
-        const token = jwt.sign( { userId: 1 }, 
+        const token = jwt.sign( { userId: 1, profileId: PROFILE_GUEST }, 
                                 process.env.JWT_SECRET,
                                 { algorithm: 'HS256',
                                   expiresIn: parseInt(process.env.JWT_EXPIRES) });
+        // return json with base64 token
+        res.json( { token } );
+    }
+    else if(email === 'admin@test.com' &&
+            pass === 'abc123'){
+        // create token
+        const token = jwt.sign( { userId: 2, profileId: PROFILE_ADMIN }, 
+            process.env.JWT_SECRET,
+            { algorithm: 'HS256',
+              expiresIn: parseInt(process.env.JWT_EXPIRES) });
         // return json with base64 token
         res.json( { token } );
     }
@@ -37,12 +51,13 @@ async function validateToken(req, res, next){
         //console.log('token:', token);
         // 
         try{
-            // verify token, and get user ID
-            const { userId } = jwt.verify(token, process.env.JWT_SECRET);
+            // verify token, and get user and profile ID
+            const { userId, profileId } = jwt.verify(token, process.env.JWT_SECRET);
             // check userId
-            //console.log('userId: ', res.locals.userId);
-            // store userId for next methods
+            //console.log('userId: ', userId, ' profileId:', profileId);
+            // store userId and profileId for next methods
             res.locals.userId = userId;
+            res.locals.profileId = profileId;
             next();
         }
         catch(err){
@@ -55,8 +70,9 @@ async function validateToken(req, res, next){
 
 
 async function doLogout(req, res, next){
-    // check if userId is stored in locals
-    console.log('userId: ', res.locals.userId);
+    // check if userId and profileId is stored in locals
+    const { userId, profileId } = res.locals;
+    //console.log('userId: ', userId, ' profileId:', profileId);
     //
     res.sendStatus(200);
 }
