@@ -16,7 +16,12 @@ const logger = winston.createLogger({
             filename: path.join(__dirname, '..', 'logs', 'errors.log'),
             // "error" only errors - other option "info" catch all infos
             level: 'error' 
-        }) 
+        }), 
+        new winston.transports.File({
+            filename: path.join(__dirname, '..', 'logs', 'infos.log'),
+            // "error" only errors - other option "info" catch all infos
+            level: 'info' 
+        })
     ]
 });
 

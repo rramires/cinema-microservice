@@ -1,5 +1,6 @@
 // imports
 const { validateToken, validateAdmin, validateMovie } = require('../middlewares/validationMiddeware');
+const logger = require('../config/logger');
 
 /**
  * Export function for dependency inversion betwin app and repository
@@ -66,7 +67,9 @@ module.exports = (app, repository) => {
             imagem,
             categorias
         });
-        //
+        // add log info
+        logger.info(`${new Date()} - User: ${res.locals.userId} - Level: ${res.locals.profileId} - Add movie: ${result._id}`);
+        // 201 Created success
         res.status(201).json(result);
     });
 
@@ -75,9 +78,12 @@ module.exports = (app, repository) => {
      * Delete Movie
      */
     app.delete('/movies/:id', validateToken, validateAdmin, async(req, res, next) => {
+        const id = req.params.id;
         // delete
-        const result = await repository.deleteMovie(req.params.id);
-        //
+        const result = await repository.deleteMovie(id);
+        // add log info
+        logger.info(`${new Date()} - User: ${res.locals.userId} - Level: ${res.locals.profileId} - Delete movie: ${id}`);
+        // 204 OK - No Content
         res.status(204).json(result);
     });
 };

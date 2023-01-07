@@ -1,6 +1,7 @@
 //
 const jwt = require('jsonwebtoken');
 const schema = require('../schemas/movieSchema');
+const logger = require('../config/logger');
 
 
 // mock level profiles
@@ -52,6 +53,8 @@ function validateAdmin(req, res, next){
         next();
     }
     else{
+        // add log info
+        logger.info(`${new Date()} - User: ${res.locals.userId} - Level: ${res.locals.profileId} - Try unauthorized: ${req.method} in ${req.path}`);
         //send 403 forbidden
         res.sendStatus(403);
     }
