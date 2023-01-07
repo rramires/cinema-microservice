@@ -1,4 +1,5 @@
-
+// imports
+const { validateToken } = require('../middlewares/validationMiddeware');
 
 /**
  * Export function for dependency inversion betwin app and repository
@@ -10,7 +11,7 @@ module.exports = (app, repository) => {
     /**
      * Get Sessions by city and movie ID
      */
-    app.get('/cities/:cityId/movies/:movieId', async(req, res, next) => {
+    app.get('/cities/:cityId/movies/:movieId', validateToken, async(req, res, next) => {
         // get 
         const sessions = await repository.getMovieSessionByCityId(req.params.movieId, req.params.cityId);
         // test
@@ -27,7 +28,7 @@ module.exports = (app, repository) => {
     /**
      * Get Movies by city ID
      */
-    app.get('/cities/:cityId/movies', async(req, res, next) => {
+    app.get('/cities/:cityId/movies', validateToken, async(req, res, next) => {
         // get 
         const movies = await repository.getMoviesByCityId(req.params.cityId);
         // test
@@ -44,7 +45,7 @@ module.exports = (app, repository) => {
     /**
      * Get Cinemas by city ID
      */
-    app.get('/cities/:cityId/cinemas', async(req, res, next) => {
+    app.get('/cities/:cityId/cinemas', validateToken, async(req, res, next) => {
         // get 
         const cinemas = await repository.getCinemasByCityId(req.params.cityId);
         // test
@@ -61,7 +62,7 @@ module.exports = (app, repository) => {
     /**
      * Get Cities
      */
-    app.get('/cities', async(req, res, next) => {
+    app.get('/cities', validateToken, async(req, res, next) => {
         // get 
         const cities = await repository.getAllCities();
         // response
@@ -72,7 +73,7 @@ module.exports = (app, repository) => {
     /**
      * Get Movies by cinema ID
      */
-    app.get('/cinemas/:cinemaId/movies/:movieId', async(req, res, next) => {
+    app.get('/cinemas/:cinemaId/movies/:movieId', validateToken, async(req, res, next) => {
         // get 
         const sessions = await repository.getMovieSessionByCinemaId(req.params.movieId, req.params.cinemaId);
         // test
@@ -89,7 +90,7 @@ module.exports = (app, repository) => {
     /**
      * Get Movies by cinema ID
      */
-    app.get('/cinemas/:cinemaId/movies', async(req, res, next) => {
+    app.get('/cinemas/:cinemaId/movies', validateToken, async(req, res, next) => {
         // get 
         const movies = await repository.getMoviesByCinemaId(req.params.cinemaId);
         // test

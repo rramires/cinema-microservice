@@ -1,5 +1,5 @@
-//
-const validationMiddleware = require('../middlewares/validationMiddeware');
+// imports
+const { validateToken ,validateMovie } = require('../middlewares/validationMiddeware');
 
 /**
  * Export function for dependency inversion betwin app and repository
@@ -10,7 +10,7 @@ module.exports = (app, repository) => {
     /**
      * Get Premiere Movies
      */
-    app.get('/movies/premieres', async(req, res, next) => {
+    app.get('/movies/premieres', validateToken, async(req, res, next) => {
         // get 
         const movies = await repository.getPremiereMovies();
         // response
@@ -21,7 +21,7 @@ module.exports = (app, repository) => {
     /**
      * Get Movie by ID
      */
-    app.get('/movies/:id', async(req, res, next) => {
+    app.get('/movies/:id', validateToken, async(req, res, next) => {
         // get 
         const movie = await repository.getMovieById(req.params.id);
         // test
@@ -38,7 +38,7 @@ module.exports = (app, repository) => {
     /**
      * Get ALL Movies
      */
-    app.get('/movies', async(req, res, next) => {
+    app.get('/movies', validateToken, async(req, res, next) => {
         // get 
         const movies = await repository.getAllMovies();
         // response
@@ -49,7 +49,7 @@ module.exports = (app, repository) => {
     /**
      * Add Movie
      */
-    app.post('/movies', validationMiddleware.validateMovie, async(req, res, next) => {
+    app.post('/movies', validateToken, validateMovie, async(req, res, next) => {
         //
         const titulo = req.body.titulo;
         const sinopse = req.body.sinopse;
@@ -74,7 +74,7 @@ module.exports = (app, repository) => {
     /**
      * Delete Movie
      */
-    app.delete('/movies/:id', async(req, res, next) => {
+    app.delete('/movies/:id', validateToken, async(req, res, next) => {
         // delete
         const result = await repository.deleteMovie(req.params.id);
         //

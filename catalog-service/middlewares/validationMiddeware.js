@@ -1,6 +1,5 @@
 //
 const jwt = require('jsonwebtoken');
-const schema = require('../schemas/movieSchema');
 
 
 /**
@@ -37,21 +36,4 @@ async function validateToken(req, res, next){
 }
 
 
-/**
- * Validate movie schema
- */
-const validateMovie = (req, res, next) => {
-    const { error } = schema.validate(req.body);
-    //
-    if(error){
-        // 422 Unprocessable Entity
-        return res.status(422).json(error.details.map(d => d.message));
-    }
-    else{
-        next();
-    }
-}
-
-
-module.exports = { validateToken,
-                   validateMovie };
+module.exports = { validateToken };
