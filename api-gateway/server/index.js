@@ -5,7 +5,7 @@ const cookieParser = require('cookie-parser');
 const morgan = require('morgan');
 const helmet = require('helmet');
 //
-const authController = require('./authController');
+const authController = require('../controllers/authController');
 //
 // express app
 const app = express();

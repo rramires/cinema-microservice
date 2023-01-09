@@ -1,0 +1,10 @@
+[{
+    "email": "guest@test.com",
+    "pass": "$2a$12$.DpjAo2EjcNsJ458ALpjVOwbfXcLN1biD.kswTl07mwSlWBO50FKi",
+    "profileId": 0
+},
+{
+    "email": "admin@test.com",
+    "pass": "$2a$12$kWcO6.SekRAtQL1/RLiOPOfIquzO25yj2ItgwmIcxxorrtZ/2nI8S",
+    "profileId": 1
+}]
