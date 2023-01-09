@@ -1,22 +1,29 @@
 // imports
 const database = require('../config/database');
 //const { ObjectId } = require('mongodb');
+const bcrypt = require('bcryptjs');
 
 
 /**
  * Return user by E-mail and Password
  */
-async function getUserByCheck(email, password){
+async function getUserByCheck(email, pass){
     const db = await database.connect();
     //
-    const user = db.collection('users').findOne( { email } );
+    const user = await db.collection('users').findOne( { email } );
     //
     if(!user){
-        throw new Error('User not found!');
+        throw new Error('Wrong user or/and password!');
     }
     else{
-        //TODO: Implementar checagem de senha
-        return user;
+        // check password
+        const isValid = bcrypt.compareSync(pass, user.pass);
+        if(!isValid){
+            throw new Error('Wrong user or/and password!');
+        }
+        else{
+            return user;
+        }
     }
 };
 
