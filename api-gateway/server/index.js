@@ -28,6 +28,7 @@ const options = {
 //
 // auth routes
 app.post('/login', authController.doLogin);
+app.use(authController.validateBlackList); // check in all routes
 app.post('/logout', authController.validateToken, authController.doLogout);
 //
 // proxies

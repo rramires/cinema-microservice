@@ -28,4 +28,21 @@ async function getUserByCheck(email, pass){
 };
 
 
-module.exports = { getUserByCheck };
+async function blacklistToken(token){
+    const db = await database.connect();
+     //
+     return await db.collection('blacklist').insertOne( { _id: token } );
+}
+
+
+async function checkBlackList(token){
+    const db = await database.connect();
+    //
+    const tk = await db.collection('blacklist').findOne( { _id: token } );
+    return tk ? true : false;
+}
+
+
+module.exports = { getUserByCheck,
+                   blacklistToken,
+                   checkBlackList };

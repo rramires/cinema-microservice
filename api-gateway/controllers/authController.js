@@ -30,6 +30,28 @@ async function doLogin(req, res, next){
 }
 
 
+async function validateBlackList(req, res, next){
+    // get from header autorizarion
+    let token = req.headers['authorization'];
+    if(!token){
+        next();
+    }
+    else{
+        // remove unnecessary part
+        token = token.replace('Bearer ', '');
+        // verify
+        const isBlacklisted = await repository.checkBlackList(token);
+        if(isBlacklisted){
+            // send 401 unauthorized
+            res.sendStatus(401);
+        }
+        else{
+            next();
+        }
+    }
+}
+
+
 async function validateToken(req, res, next){
     // get from header autorizarion
     let token = req.headers['authorization'];
@@ -63,14 +85,18 @@ async function validateToken(req, res, next){
 
 
 async function doLogout(req, res, next){
-    // check if userId and profileId is stored in locals
-    const { userId, profileId } = res.locals;
-    //console.log('userId: ', userId, ' profileId:', profileId);
-    //
+    // get from header autorizarion
+    let token = req.headers['authorization'];
+    // remove unnecessary part
+    token = token.replace('Bearer ', '');
+    // insert in blacklist
+    await repository.blacklistToken(token);
+    // Ok
     res.sendStatus(200);
 }
 
 
 module.exports = { doLogin,
                    doLogout,
-                   validateToken };
+                   validateToken,
+                   validateBlackList };
