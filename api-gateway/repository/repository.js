@@ -30,14 +30,14 @@ async function getUserByCheck(email, pass){
 
 async function blacklistToken(token){
     const db = await database.connect();
-     //
-     return await db.collection('blacklist').insertOne( { _id: token } );
+    // insert *** data used for expire ttl index created in mongodb
+    return await db.collection('blacklist').insertOne( { _id: token, data: new Date() } );
 }
 
 
 async function checkBlackList(token){
     const db = await database.connect();
-    //
+    // check
     const tk = await db.collection('blacklist').findOne( { _id: token } );
     return tk ? true : false;
 }
