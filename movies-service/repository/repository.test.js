@@ -65,8 +65,11 @@ test('Return Premiere movies', async() => {
     // verify
     expect(premiereMovies).toBeTruthy();
     expect(Array.isArray(premiereMovies)).toBeTruthy();
+    /* 
+        ->> Update dataLancamento in movies if fail <<- 
+    */
     expect(premiereMovies.length).toBeTruthy();
-    // date >= previous month ->> Update dataLancamento in movies if fail <<-
+    // date >= previous month 
     expect(premiereMovies[0].dataLancamento.getTime()).toBeGreaterThanOrEqual(monthAgo.getTime());
 }); 
 
