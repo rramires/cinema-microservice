@@ -37,21 +37,4 @@ async function validateToken(req, res, next){
 }
 
 
-/**
- * Validate admin
- */
-function validateAdmin(req, res, next){
-    const { profileId } = res.locals;
-
-    if(profileId == PROFILE_ADMIN){
-        next();
-    }
-    else{
-        //send 403 forbidden
-        res.sendStatus(403);
-    }
-}
-
-
-module.exports = { validateToken,
-                   validateAdmin };
+module.exports = { validateToken };
