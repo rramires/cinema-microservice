@@ -27,7 +27,7 @@ const options = {
 }
 //
 // auth routes
-app.post('/login', authController.doLogin);
+app.post('/login', authController.validateSchema, authController.doLogin);
 app.use(authController.validateBlackList); // check in all routes
 app.post('/logout', authController.validateToken, authController.doLogout);
 //
@@ -41,6 +41,9 @@ app.use('/movies', moviesServiceProxy);
 app.use('/cities|cinemas/i', catalogServiceProxy);
 //
 // start app
-app.listen(process.env.API_PORT, () =>{
+const server = app.listen(process.env.API_PORT, () =>{
     console.log(`API-Gateway started at port ${process.env.API_PORT}`);
 });
+
+
+module.exports = server;

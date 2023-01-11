@@ -1,6 +1,8 @@
 // imports
 const jwt = require('jsonwebtoken');
+const schema = require('../schemas/loginSchema');
 const repository = require('../repository/repository');
+
 
 // mock level profiles
 const PROFILE_GUEST = 0;
@@ -52,6 +54,19 @@ async function validateBlackList(req, res, next){
 }
 
 
+async function validateSchema(req, res, next){
+    const { error } = schema.validate(req.body);
+    //
+    if(error){
+        // 422 Unprocessable Entity
+        return res.status(422).json(error.details.map(d => d.message));
+    }
+    else{
+        next();
+    }
+}
+
+
 async function validateToken(req, res, next){
     // get from header autorizarion
     let token = req.headers['authorization'];
@@ -99,4 +114,5 @@ async function doLogout(req, res, next){
 module.exports = { doLogin,
                    doLogout,
                    validateToken,
-                   validateBlackList };
+                   validateBlackList,
+                   validateSchema };
